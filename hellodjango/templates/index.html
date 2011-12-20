@@ -1,0 +1,31 @@
+<meta>
+	<title>The Skill Acquirer</title>
+</meta>
+
+<style>
+div.skill{
+	margin-left:20px;
+}
+div.goal{
+	margin-left:40px;
+}
+</style>
+<a href="http://localhost:8000/admin/">Edit data</a>
+</br>
+{% for skill in user.profile.skills.all %}
+	<div class="skill">
+		{{user.first_name}}'s {{skill}} skill</br>
+		50% away from completing beginner</br>
+		<meter min=0 max=100 value=50></meter>
+	</div>
+	</br>
+	{% for goal in skill.goals.all %}
+			<div class="goal">
+				{{goal.name}}: {{goal.get_percentage_complete}}% Complete</br>
+				<meter min="0" max="100" value="{{goal.get_percentage_complete}}"></meter>
+			</div>
+		</br>
+	{% endfor %}
+
+{% endfor %}
+

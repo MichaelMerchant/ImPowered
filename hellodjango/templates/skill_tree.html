@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta>
+	<title>The Skill Acquirer - Skill Tree</title>
+</meta>
+
+<!-- CSS Files -->
+<link type="text/css" href="{{STATIC_URL}}css/jit_base.css" rel="stylesheet" />
+<link type="text/css" href="{{STATIC_URL}}css/Spacetree.css" rel="stylesheet" />
+
+<!-- JIT Library File -->
+<script language="javascript" type="text/javascript" src="{{STATIC_URL}}js/jit_custom.js"></script>
+
+<!-- load json -->
+<script language="javascript" type="text/javascript">
+	debug_node = null;
+	var st_json = {{st_json|safe}};
+</script>
+
+<!-- Example File -->
+<script language="javascript" type="text/javascript" src="{{STATIC_URL}}js/skill_tree.js"></script>
+</head>
+
+<body onload="init();">
+
+
+<a href="http://localhost:8000/admin/">Edit data</a>
+</br>
+<div style="display:none;">
+{% for skill in user.profile.skills.all %}
+	<div class="skill">
+		{{user.first_name}}'s {{skill}} skill</br>
+		50% away from completing beginner</br>
+		<meter min=0 max=100 value=50></meter>
+	</div>
+	</br>
+	{% for goal in skill.goals.all %}
+			<div class="goal">
+				{{goal.name}}: {{goal.get_percentage_complete}}% Complete</br>
+				<meter min="0" max="100" value="{{goal.get_percentage_complete}}"></meter>
+			</div>
+		</br>
+	{% endfor %}
+
+{% endfor %}
+</div>
+
+<div id="container">
+<div id="left-container">
+<br/><br/><br/><br/><br/><br/>
+<h4>Visible Progress Bars</h4>
+<table>
+<tr><td>Selected Nodes</td><td><input type="checkbox" id="selected-nodes" checked="checked"</td></tr>
+<tr><td>All Nodes</td><td><input type="checkbox" id="all-nodes"</td></tr>
+</table>
+</div>
+<div id="center-container">
+    <div id="infovis"></div>    
+</div>
+
+<div id="st_title">Michael's Programming Skill Tree</div>
+<div id="log"></div>
+<div id="edit_link"><a href="/admin/impowered/skill/">Click here to Edit the Tree</a></div>
+</div>
