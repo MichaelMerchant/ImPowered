@@ -21,6 +21,16 @@ def skill_tree(request):
 		{'user':user, 
 		 'st_json': st_json},)
 	
+def skill_tree_user(request, userid):
+	user = User.objects.all()[0]
+	
+	st_json = node_json(user.profile.skills.get(pk=userid))
+	st_json = st_json[:-1] + ' '
+	
+	return render(request, "skill_tree.html", 
+		{'user':user, 
+		 'st_json': st_json},)
+	
 def skill_tree2(request):
 	user = User.objects.all()[0]
 	return render(request, "skill_tree2.html", {'user':user},)
