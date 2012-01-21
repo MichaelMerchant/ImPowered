@@ -1,31 +1,15 @@
-<meta>
-	<title>The Skill Acquirer</title>
-</meta>
-
-<style>
-div.skill{
-	margin-left:20px;
-}
-div.goal{
-	margin-left:40px;
-}
-</style>
-<a href="http://localhost:8000/admin/">Edit data</a>
-</br>
-{% for skill in user.profile.skills.all %}
-	<div class="skill">
-		{{user.first_name}}'s {{skill}} skill</br>
-		50% away from completing beginner</br>
-		<meter min=0 max=100 value=50></meter>
-	</div>
-	</br>
-	{% for goal in skill.goals.all %}
-			<div class="goal">
-				{{goal.name}}: {{goal.get_percentage_complete}}% Complete</br>
-				<meter min="0" max="100" value="{{goal.get_percentage_complete}}"></meter>
-			</div>
-		</br>
-	{% endfor %}
-
-{% endfor %}
-
+<html>
+	<head>
+		<meta>
+			<title>Michael Merchant Bio Page</title>
+		</meta>
+	</head>
+	
+	<body>
+		Hello there! You've reached my bio page. It's still under construction.<br/>
+		But feel free to send me a message at merchant dot michael at gmail dot com!
+		<br/><br/>
+		If you're looking for the pairing app, <a href="/pairing/">click here</a>.<br/>
+		If you're looking for the EWeek Bay Area volunteer map, <a href="/eweekmap/">click here</a>.
+	</body>
+</html>

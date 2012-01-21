@@ -9,7 +9,7 @@ from impowered.views import *
 
 urlpatterns = patterns('impowered.views',
 
-     url(r'^$', 'home', name='home'),
+     url(r'^$', 'home', name='impowered_home'),
      url(r'^skill_tree$', 'skill_tree', name='skill_tree'),
      url(r'^skill_tree/(?P<userid>\d+)/(?P<rootid>\d+)/$', 'skill_tree_user', name='skill_tree_user'),
      url(r'^skill_tree2$', 'skill_tree2', name='skill_tree2'),

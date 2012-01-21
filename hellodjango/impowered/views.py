@@ -1,15 +1,20 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.core.urlresolvers import reverse
 import datetime
 
 from models import *
 from django.contrib.auth.models import User
 
+
 @login_required
 def home(request):
     user = request.user
     return render(request, "index.html")
+    
+def login(request):
+    pass
     
 def skill_tree(request):
 	user = User.objects.all()[0]

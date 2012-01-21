@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 class Profile(models.Model):
-	uid = models.OneToOneField(User, related_name = "profile")
+	uid = models.OneToOneField(User, related_name = "profile")	
 	
 	def __unicode__(self):
 		return self.uid.username

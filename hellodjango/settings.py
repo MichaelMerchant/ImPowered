@@ -126,6 +126,12 @@ INSTALLED_APPS = (
      'django.contrib.admindocs',
      'impowered',
      'south',
+     'pairing',
+     'map_volunteering',
+     'geopy',
+     'simplejson',
+     'accounts',
+     'utils',
 )
 
 # A sample logging configuration. The only tangible logging
