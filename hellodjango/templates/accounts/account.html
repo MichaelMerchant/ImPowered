@@ -1,0 +1,11 @@
+{% if user.is_authenticated %}
+
+	Hi {{user.get_full_name}}<br/><br/>
+	<form action="/accounts/logout/" method="post">{% csrf_token %}
+		<input type="submit" value="Logout">
+	</form>
+{% else %}
+
+	<a href="/accounts/login/?next={{next}}">Login</a></br>
+
+{% endif %}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>EWeek Volunteering Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+    </style>
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key={{api_key}}&sensor=true">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+        var myOptions = {
+          center: new google.maps.LatLng(37.5,-122.150345),
+          zoom: 10,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            myOptions);
+        
+        var geoCoder = new google.maps.Geocoder();
+
+		function pausecomp(millis){
+			var date = new Date();
+			var curDate = null;
+			
+			do { curDate = new Date(); }
+			while(curDate-date < millis);
+		} 
+
+        var markerData = {{data|safe}};
+        
+        for( datum in markerData ){
+        	// datum=markerData[0];
+	        var request = {'address':datum.School};
+	        geoCoder.geocode(request, function(arr, status){
+	        	console.log(status);
+	        	if(status==='OK'){
+		        	results = arr;
+			        pos = results[0].geometry.location;
+					var marker = new google.maps.Marker({
+						position: pos,
+						map: map,
+						title: datum.Category,
+					});
+		        	console.log(results);
+	        	}else{
+	        		console.log(datum, datum.school);
+	        	}
+	        });
+        	pausecomp(1000);
+        }
+        
+        
+        
+		var marker = new google.maps.Marker({
+			position: new google.maps.LatLng(37.5,-122.150345),
+			map: map,
+			title:"Hello World!"
+		});
+      }
+    </script>
+  </head>
+  <body onload="initialize()">
+    <div id="map_canvas" style="width:100%; height:100%"></div>
+  </body>
+</html>

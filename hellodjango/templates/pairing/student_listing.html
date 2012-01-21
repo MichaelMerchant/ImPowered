@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+	
+	<title>
+		Pairing App
+	</title>
+<!-- <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/main.css" media="screen" /> -->
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}jquery-ui-1.8.17/css/start/jquery-ui-1.8.17.custom.css" media="screen" />
+<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="{{STATIC_URL}}jquery-ui-1.8.17/js/jquery-ui-1.8.17.custom.min.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		{% for student in project.students.all %}
+			$.ajax({
+				url:"/pairing/row/{{student.id}}/{{project.id}}/",
+				success: function(data){
+					$("table").append(data.row_html);
+				},
+				async:false,
+			});
+		{% endfor %}
+		initRow($('body'));
+	});
+	
+	function initRow($node){
+		$( "input:submit", $node).button();
+		$( "input:submit.invite" ).click(function(event) { 
+			 $button = $(event.target);
+			var student_id = $button.parents(".student_row").first().attr("pk");
+			$button.button("disable");
+			var project_id = $("h1").attr("pk");
+			$.ajax({
+				url:"/pairing/invite/"+student_id + "/" + project_id + "/",
+				success:function(data){
+					console.log(data);
+					$row = $("table tr.student_row[pk="+data.student_id+"]"); 
+					$.ajax({
+						url:"/pairing/row/"+data.student_id+"/"+data.project_id+"/",
+						success: function(data){
+							$row.replaceWith(data.row_html);
+							$row = $("table tr.student_row[pk="+data.student_id+"]");
+							initRow($row);
+						},
+					});
+				},
+			});
+			console.log("We've been clicked!!!", event);
+			return false; 
+		});
+	}
+</script>
+
+</head>
+
+
+
+<body>
+	<h1 pk={{project.pk}}>{{Project}}</h1>
+
+	<table>
+		<tr><td>Name</td><td></td></tr>
+	</table>
+
+	<br/><br/><br/>
+
+	{% include "accounts/account.html" %}
+</body>
+</html>

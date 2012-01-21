@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>Login to Michael's Apps</title>
+</head>
+<h1>Login</h1>
+<form name="input" action="/accounts/login/?next={{next}}" method="post">{% csrf_token %}
+{% if fail %}
+	The password and user combination you entered was not recognized.</br>
+	Please try again or register for an account. 
+{% endif %}
+<table>
+	<tr>
+		<td><label for="#username">Username:</label> </td>
+		<td><input type="text" name="username" value="" id="username"/></td>
+	</tr>
+	<tr>
+		<td><label for="#pass">Password: </label></td>
+		<td><input type="password" name="pass" value="" id="pass"/></td>
+	</tr>
+</table>
+<input type="submit" value="Login" />
+</form>
+</html>

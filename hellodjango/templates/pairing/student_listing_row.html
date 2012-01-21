@@ -1,0 +1,24 @@
+<tr class="student_row" pk={{student.id}}>
+	<td class="name">{{student}}</td>
+	{% if available_action == "Propose" %}
+		<td class="action propose">
+			<input type="submit" value="Invite to Partner" class="invite">
+		</td>
+	{% else %}{% if available_action == "Waiting" %}
+		<td class="action waiting">
+			Currently Waiting to Hear Back
+		</td>
+	{% else %}{% if available_action == "My partner" %}
+		<td class="action partnered">
+			My partner!
+		</td>
+	{% else %}{% if available_action == "Accept?" %}
+		<td class="action accept">
+			<input type="submit" value="Accept Offer to Partner" class="accept">
+		</td>
+	{% else %}
+		<td class="action unknown">
+			{{available_action}}
+		</td>
+	{% endif %}{% endif %}{% endif %}{% endif %}
+</tr>

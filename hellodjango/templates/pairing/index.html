@@ -1,0 +1,6 @@
+<html>
+<h2>Available classes and projects:</h2>
+{% for project in projects %}
+	<a href="./project/{{project.pk}}/">{{project.name}}</a><br/>
+{% endfor %}
+</html>
